@@ -3,11 +3,10 @@
 
 \begin{center}
 
-\Large{基於老化改善電路可靠度}
+\Large{藉由回收老化引起的時鐘偏差使老化變得有用進而改善電路可靠度}
 \end{center}
 \hfill\break
 研究生: 曾天鴻 $\hfill$指導教授:吳凱強 教授
-%\begin{flushright}張勤振 教授\end{flushright}
 
 
 
@@ -25,7 +24,7 @@
 
 \hfill\break
 
-使用深度學習所做的風格轉換在影片方面的應用大部份只使用一張風格圖來做特徵的擷取並合成，就算使用兩張以上的風格圖也經常是沒有規則的融合在一張圖裡，這樣的設計的確保留影片的風格一致性但卻減少了使用者的創意和選擇性。因此我們將前景物體和背景分開，並個別進行不同風格的轉換。我們使用全卷積神經網路來進行語義分割，我們除了增加所分割物體的可靠性，也利用所分割的資訊和前後景的關係來反覆地改善分割結果。在影片連續性上面，我們也使用分割的結果來加強光流，依照前景和背景的特性採用不同的動作估計方法。改善了光流中運動邊界不準確的問題，也用光流來減少因阻擋，物體變形而分割不正確和不連續的問題。
+電子元件老化使得電路性能和壽命顯著損失，這是使電子元件可靠性降低的主要因素。在這篇論文中，我們建議通過操縱和回收這些時變偏斜來利用老化引起的時鐘偏差（意即，使電路能容忍更多老化），藉以補償因老化導致的邏輯電路之性能下降。我們的目標是在電路中分配可實現/合理的老化引起的時鐘偏差，使得可以容忍由於老化導致的性能下降，(意即，可以最大化電路壽命)。藉由實驗，平均可以達到24.95％老化耐受性。此外，我們在時鐘緩衝器上採用$V_{th}$分配，以進一步容忍老化引起的邏輯電路效能降級。當$V_{th}$分配應用於上述老化操作之上時，平均老化耐受性可以提高到37.61％。
 
 \end{abstractzh}
 
@@ -39,9 +38,8 @@
 \end{center}
 \hfill\break
 
-Student:Tien-Hung Tseng $\hfill$ Advisor:Prof. Kai-Chiang Wu
-%\begin{flushright}Prof. Chin-Chen Chang\end{flushright}
-%$\hfill$Prof. Chin-Chen Chang
+Student: Tien-Hung Tseng $\hfill$ Advisor: Prof. Kai-Chiang Wu
+
 \bigskip
 
 \begin{center}
@@ -54,8 +52,7 @@ ABSTRACT
 
 \bigskip
 
-%Most applications about artistic style transfer for videos, which based on deep learning, only extract features from a single style image to do texture synthesis. Even if they use two style images, the results still blend without rules. This design preserves the style to be identical in the whole video, but it loses the creativity and selectivity for users. Therefore, in this thesis we segment foreground objects and background, and then apply different styles respectively. We use a fully convolutional neural network to perform semantic segmentation. We increase the reliability of the segmentation, and use the information of segmentation and the relationship between foreground objects and background to improve segmentation iteratively. We also use segmentation to improve optical flow, and apply different motion estimation methods between foreground objects and background. This improves the motion boundaries of optical flow, and solves the problems of incorrect and discontinuous segmentation caused by occlusion and shape deformation.
-Device aging, which causes significant loss on circuit performance and lifetime, has been a primary factor in reliability degradation of nanoscale designs. In this paper, we propose to take advantage of aging-induced clock skews (i.e., make them useful for aging tolerance) by manipulating these time-varying skews to compensate for the performance degradation of logic networks. The goal is to assign achievable/reasonable aging-induced clock skews in a circuit, such that its overall performance degradation due to aging can be minimized, that is, the lifespan can be maximized.  On average, 24.95\% aging tolerance can be achieved with insignificant design overhead. Moreover, we employ $V_{th}$ assignment to further tolerate the aging-induced degradation of logic networks. When $V_{th}$ assignment is applied on top of aforementioned aging manipulation, the average aging tolerance can be enhanced to 37.61\%.
+\input{chapters/abstract.tex}
 
 
 \end{abstracten}
