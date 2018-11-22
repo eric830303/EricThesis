@@ -40,11 +40,11 @@ The 20\% DCC will mitigate the aging of buffer 3 and its downstream buffers, whi
 \label{subsec:dccccc}
 Figure~\ref{fig:dcctype} shows a generalized example of DCC insertion for a pair of flip-flops (\ce{FF_i} and \ce{FF_j}) where there exist \textit{aging-critical paths} from \ce{FF_i} to \ce{FF_j}, defined as follow:\\
 
-\noindent \textbf{\uline{Definition 1} (\textit{Aging-critical path}):}  A path is defined as an \textit{aging-critical path} if, in the presence of aging, it is possible to determine the clock period of the circuit.\\ 
+\noindent \textbf{Definition 1 (\textit{Aging-critical path}):}  A path is defined as an \textit{aging-critical path} if, in the presence of aging, it is possible to determine the clock period of the circuit.\\ 
 
 Every pair of flip-flops between which there exist aging-critical paths needs to be considered and here, we use this generalized example to illustrate our SAT-based formulation. In Figure~\ref{fig:dcctype}, buffers 1 - 7 are candidate locations for DCC insertion and according to the encoding scheme explained in Section~\ref{subsec:eddcd}, two Boolean variables are introduced for each of the seven buffers to encode four possibilities of DCC insertion. Considering all seven buffers, there are a total of 16,384 (= $4^7$) possibilities for DCC insertion, just for this pair of flip-flops. This makes the SAT-based formulation intractable due to the explosion of clause count. Therefore, we set up the following constraints on DCC insertion: \\
 
-\noindent \textbf{\uline{Constraint 1} (\textit{DCC constraint}):} At most one DCC on a single clock path (from the clock source to one of the flip-flops).\\
+\noindent \textbf{Constraint 1 (\textit{DCC constraint}):} At most one DCC on a single clock path (from the clock source to one of the flip-flops).\\
 
 In order to ensure no more than one DCC on any clock path, we can use the Boolean variables introduced for DCC insertion, i.e., {\fontsize{9}{10}$B_{p,q} \left(1 \leq p \leq P, 1 \leq q \leq Q = \lceil \lg (N + 1) \rceil \right)$}, to generate some clauses which suppress the occurrence of having two DCCs on a clock path. Consider buffer 2 (encoded by {\fontsize{9}{10}$\left\{B_{2,2}, B_{2,1}\right\}$}) and buffer 3 (encoded by {\fontsize{9}{10}$\left\{B_{3,2}, B_{3,1}\right\}$}) in Figure~\ref{fig:dcctype}. If there is a DCC at buffer 2 (i.e., {\fontsize{9}{10}$\{B_{2,2}, B_{2,1}\} \not\equiv \{0, 0\}$}), then there must no DCC at buffer 3 (i.e., {\fontsize{9}{10}$\{B_{3,2}, B_{3,1}\} \equiv \{0, 0\}$}), and vice versa. The constraint can be formally written as:
 {\fontsize{9}{10}
@@ -77,7 +77,7 @@ C_{j\_aged} = 1.13 \times \tau_1+ 1.16 \times \left( \tau_5 + \tau_6 + \tau_7 + 
 \end{gather*}
 where $C_{i\_aged}$ and $C_{j\_aged}$ denote aged $C_i$ and $C_j$, respectively. Next, we apply Equations~(\ref{eq:tsu}) and~(\ref{eq:th}) to check whether timing constraints will be violated under this DCC deployment.\\
 
-\noindent \textbf{\uline{Constraint 2} (\textit{Timing constraint}):} No existence of timing violation.\\
+\noindent \textbf{Constraint 2 (\textit{Timing constraint}):} No existence of timing violation.\\
 
 Given one clock period $T_c$ derived by binary search, one aging-critical path, and its associated clock network, all possible DCC deployment can be classified into 3 classes according to the number of DCCs used. Furthermore, due to the aforementioned DCC constraints, the SAT solver will only output a DCC deployment where there does not exist more than one DCC along any clock path. Thus, in the following discussion, the deployment with more than one DCC along a single clock path can be ignored. In each class, if the DCC deployment causes a timing violation within 10 years (i.e., the lifespan specification), then the deployment will be transformed into CNF clauses, such that the solver will not output the deployment as results. Here, we explain the generation of CNF clauses by using the example in Figure~\ref{fig:dccinsert}.\\
 
@@ -152,7 +152,7 @@ Such a technique of high-$V_{th}$ assignment can cause an issue of fragmentary h
 
 Such a rule can suppress the occurrence of fragmentary high-$V_{th}$ assignment for clock buffers. Moreover, it also transforms the problem of high-$V_{th}$ assignment to the problem of selecting \textit{high-$V_{th}$ buffer leader}, which is defined as follow:\\
 
-\noindent \textbf{\uline{Definition 2} (\textit{High-$V_{th}$ buffer leader}):} A clock buffer is defined as a \textit{high-$V_{th}$ buffer leader}, if the $V_{th}$ values of its downstream buffers (include the leader itself) are assigned high value and the $V_{th}$ values of its upstream buffers (exclude the leader itself) are nominal value.\\
+\noindent \textbf{Definition 2 (\textit{High-$V_{th}$ buffer leader}):} A clock buffer is defined as a \textit{high-$V_{th}$ buffer leader}, if the $V_{th}$ values of its downstream buffers (include the leader itself) are assigned high value and the $V_{th}$ values of its upstream buffers (exclude the leader itself) are nominal value.\\
 
 Conceptually, there exists one difference between DCCs and high-$V_{th}$ buffer leaders. DCCs are physical gates inserted at the inputs of clock buffers to manipulate the aging rates of downstream buffers. However, high-$V_{th}$ buffer leaders, selected from the existing clock buffers, indicate where we begin assigning high $V_{th}$ to the buffers toward flip-flops (exclusive).
 
@@ -180,7 +180,7 @@ Note that, if the buffer, located deep in the clock tree, is selected as the lea
 
 When two clock buffers along a single clock path are selected as leaders, the leader selection is meaningless, so that the following constraints are considered. In this way, the SAT solver will not output the corresponding leader selection in the result if the CNF is satisfiable.\\
 
-\noindent \textbf{\uline{Constraint 3} (\textit{Leader constraint}):} At most one buffer along a single clock path is selected as high-$V_{th}$ buffer leader.\\
+\noindent \textbf{Constraint 3 (\textit{Leader constraint}):} At most one buffer along a single clock path is selected as high-$V_{th}$ buffer leader.\\
 %\noindent \textbf{\uline{Leader constraint: At most one buffer along a single clock path is selected as high-$V_{th}$ buffer leader.}}
 
 The constraint is similar to the aforementioned DCC constraint (see Section~\ref{subsec:dccccc}, Constraint 1). In order to ensure no more than one leader along any clock path, we generate some clauses to suppress the occurrence of having two leaders along a clock path. Consider buffer 2 (encoded by {\fontsize{9}{10}$B_{2,3}$}) and buffer 3 (encoded by {\fontsize{9}{10}$B_{3,3}$}) in Figure~\ref{fig:dcctype}. If buffer 2 is selected as a leader (i.e., {\fontsize{9}{10}${B_{2,3}} \equiv {1}$}), then buffer 3 must not be selected as a leader (i.e., {\fontsize{9}{10}$B_{3,3} \not\equiv {1}$}), and vice versa. The constraint can be formally written as:

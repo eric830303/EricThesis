@@ -1,7 +1,7 @@
 \documentclass[oneside,zh]{nctuthesis}
 \usepackage{enumitem}
 \usepackage{times}
-\usepackage{ulem}
+%\usepackage{ulem}%If the package is used, booktitle of ref/bib will be ulem
 \usepackage{verbatim}
 \usepackage{color}
 \usepackage{titlesec}
@@ -90,10 +90,10 @@
 \phantomsection
 
 %插入論文審定書 著作權審定書等等
-\addcontentsline{toc}{chapter}{中文論文口試委員會審定書}
-\includepdf[pages={1}, pagecommand={}]{pdfs/ch.pdf}
+%\addcontentsline{toc}{chapter}{中文論文口試委員會審定書}
+%\includepdf[pages={1}, pagecommand={}]{pdfs/ch.pdf}
 \addcontentsline{toc}{chapter}{Thesis Certificate}
-\includepdf[pages={1}, pagecommand={}]{pdfs/en.pdf}
+%\includepdf[pages={1}, pagecommand={}]{pdfs/en.pdf}
 \addcontentsline{toc}{chapter}{論文著作權授權書}
 \includepdf[pages={1}, pagecommand={}]{pdfs/copyright.pdf}
 \renewcommand{\thesection}{\arabic{section}}
